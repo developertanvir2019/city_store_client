@@ -1,7 +1,9 @@
+import FirstNav from "./FirstNav";
+
 const Header = () => {
   return (
     <div>
-      <p>header</p>
+      <FirstNav />
     </div>
   );
 };
