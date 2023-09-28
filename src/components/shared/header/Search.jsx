@@ -9,9 +9,10 @@ const Search = () => {
           <BiSolidDownArrow />
         </span>
       </div>
+
       <div>
         <input
-          className="border-2 outline-none p-3 w-72 space-x-4 rounded-lg"
+          className="border-2 outline-none p-3 w-80 space-x-4 rounded-lg"
           type="text"
           placeholder="Article name or keyword..."
         />

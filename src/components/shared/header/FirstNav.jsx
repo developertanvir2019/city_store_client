@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import { BiLocationPlus } from "react-icons/bi";
 
 const FirstNav = () => {
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 flex justify-between px-6">
         <div className="">
           <Link to="/">
             <img
@@ -14,25 +15,16 @@ const FirstNav = () => {
             />
           </Link>
         </div>
-        <div className="flex-none gap-2">
-          <div className="form-control">
-            <Search />
-          </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+        <div className="form-control">
+          <Search />
+        </div>
+        <div className="dropdown dropdown-end">
+          <button className=" text-white font-semibold py-3 px-5 flex items-center bg-primary">
+            <span> store location </span>
+            <span className="text-xl ps-2">
+              <BiLocationPlus />
+            </span>
+          </button>
         </div>
       </div>
     </>
