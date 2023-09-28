@@ -5,7 +5,7 @@ import { BiLocationPlus } from "react-icons/bi";
 const FirstNav = () => {
   return (
     <>
-      <div className="navbar bg-base-100 flex justify-between px-6">
+      <div className="hidden navbar bg-base-100 lg:flex justify-between px-6">
         <div className="">
           <Link to="/">
             <img
