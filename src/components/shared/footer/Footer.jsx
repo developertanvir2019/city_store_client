@@ -1,8 +1,12 @@
+import BottomFooter from "./BottomFooter";
+import TopFooter from "./TopFooter";
+
 const Footer = () => {
   return (
-    <div>
-      <h1>footer</h1>
-    </div>
+    <>
+      <TopFooter />
+      <BottomFooter />
+    </>
   );
 };
 
