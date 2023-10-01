@@ -25,7 +25,7 @@ const categoryItems = [
 
 const TopBanner = () => {
   return (
-    <div>
+    <div className="bg-white">
       <div className="grid grid-cols-4  lg:grid-cols-12">
         <div className="p-1 col-span-4 lg:col-span-3 mx-8 mt-2">
           {/*<!-- Component: Leading Image One Line List --> */}
