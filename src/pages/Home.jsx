@@ -4,6 +4,7 @@ import OurCategory from "../components/category/OurCategory";
 import DayDeal from "../components/dayDeal/DayDeal";
 import Gallery from "../components/gallery/Gallery";
 import NewProduct from "../components/products/NewProduct";
+import ProductsTab from "../components/productsTab/ProductsTab";
 import Service from "../components/service/Service";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <OurCategory />
       <Banner2 />
       <DayDeal />
+      <ProductsTab />
     </div>
   );
 };
