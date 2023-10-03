@@ -1,7 +1,11 @@
+import ProductCard from "./ProductCard";
+import Tabs from "./Tabs";
+
 const ProductsTab = () => {
   return (
     <div>
-      <h1>hi</h1>
+      <Tabs />
+      <ProductCard />
     </div>
   );
 };
