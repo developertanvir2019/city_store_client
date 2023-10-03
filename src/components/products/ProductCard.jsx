@@ -2,7 +2,7 @@ import StarRatings from "react-star-ratings";
 import { FiEye, FiHeart, FiShoppingCart } from "react-icons/fi";
 const ProductCard = () => {
   return (
-    <div className="w-60 group bg-gray-50">
+    <div className="w-60 group bg-gray-50 mx-4">
       <div className="relative overflow-hidden">
         <img
           className="h-auto w-full object-cover"

@@ -1,5 +1,4 @@
 import StarRatings from "react-star-ratings";
-import CountDown from "./CountDown";
 
 const DayDeal = () => {
   return (
@@ -65,7 +64,7 @@ const DayDeal = () => {
                 starSpacing="3px"
                 starRatedColor="orange"
               />
-              <CountDown />
+              <p className="text-lg font-bold text-gray-400 pt-2">Expired</p>
               <div className="mt-5">
                 <a
                   className="px-5 py-2 rounded-md text-white font-bold bg-primary"

@@ -1,6 +1,7 @@
 import Banner2 from "../components/Banner/Banner2";
 import TopBanner from "../components/Banner/TopBanner";
 import OurCategory from "../components/category/OurCategory";
+import ClientReview from "../components/clientReview/ClientReview";
 import DayDeal from "../components/dayDeal/DayDeal";
 import Gallery from "../components/gallery/Gallery";
 import NewProduct from "../components/products/NewProduct";
@@ -18,6 +19,7 @@ const Home = () => {
       <Banner2 />
       <DayDeal />
       <ProductsTab />
+      <ClientReview />
     </div>
   );
 };
