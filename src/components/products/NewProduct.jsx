@@ -2,7 +2,6 @@ import Slider from "react-slick";
 import ProductCard from "./ProductCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./multiple.css";
 const NewProduct = () => {
   var settings = {
     dots: true,
