@@ -3,7 +3,7 @@ import TopFooter from "./TopFooter";
 
 const Footer = () => {
   return (
-    <div className="shadow-lg">
+    <div className="shadow-lg mt-20">
       <TopFooter />
       <BottomFooter />
     </div>
