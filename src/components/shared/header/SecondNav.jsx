@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
 const SecondNav = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   return (
@@ -15,15 +16,15 @@ const SecondNav = () => {
             role="navigation"
           >
             {/*      <!-- Brand logo --> */}
-            <a
+            <Link
               id="WindUI"
               aria-label="WindUI logo"
               aria-current="page"
               className="flex items-center gap-2 whitespace-nowrap py-3 lg:flex-1"
-              href="#"
+              to="/"
             >
               <img className="h-12 w-auto" src={logo} alt="city store" />
-            </a>
+            </Link>
             {/*      <!-- Mobile trigger --> */}
             <button
               className={`relative order-10 block h-10 w-10 self-center lg:hidden
@@ -63,70 +64,70 @@ const SecondNav = () => {
               }`}
             >
               <li role="none" className="flex items-stretch">
-                <a
+                <Link
                   role="menuitem"
                   aria-haspopup="false"
                   className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
-                  href="#"
+                  to="/"
                 >
                   <span>HOME</span>
-                </a>
+                </Link>
               </li>
               <li role="none" className="flex items-stretch">
-                <a
+                <Link
                   role="menuitem"
                   aria-haspopup="false"
                   className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
-                  href="#"
+                  to="/shop"
                 >
                   <span>SHOP</span>
-                </a>
+                </Link>
               </li>
               <li role="none" className="flex items-stretch">
-                <a
+                <Link
                   role="menuitem"
                   aria-haspopup="false"
                   className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
-                  href="#"
+                  to="/blog"
                 >
-                  <span>CONTACT US</span>
-                </a>
+                  <span>Blog</span>
+                </Link>
               </li>
               <li role="none" className="flex items-stretch">
-                <a
+                <Link
                   role="menuitem"
                   aria-haspopup="false"
                   className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
-                  href="#"
+                  to="/login"
                 >
                   <span>LOGIN</span>
-                </a>
+                </Link>
               </li>
             </ul>
             {/*      <!-- Actions --> */}
             <div className="ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0">
-              <a
-                href="#"
-                className="relative inline-flex h-9 me-4 w-9 items-center justify-center rounded-full text-white bg-secondary"
+              <Link
+                to="#"
+                className="relative inline-flex h-9 me-4 w-9 items-center justify-center rounded-full text-white"
               >
-                <span className="text-xl">
+                <span className="text-2xl">
                   <FiHeart />
                 </span>
-                <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-primary px-1.5 text-sm text-white">
+                <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-secondary px-1.5 text-sm text-white">
                   2<span className="sr-only"> new emails </span>
                 </span>
-              </a>
-              <a
-                href="#"
-                className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-white bg-secondary"
+              </Link>
+              <Link
+                to="#"
+                className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-white"
               >
-                <span className="text-xl">
+                <span className="text-2xl">
                   <FaShoppingCart />
                 </span>
-                <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-primary px-1.5 text-sm text-white">
+                <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-secondary px-1.5 text-sm text-white">
                   2<span className="sr-only"> new emails </span>
                 </span>
-              </a>
+              </Link>
             </div>
           </nav>
         </div>
