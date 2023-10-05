@@ -3,6 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
+import MyCart from "./MyCart";
 const SecondNav = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   return (
@@ -117,8 +118,8 @@ const SecondNav = () => {
                   2<span className="sr-only"> new emails </span>
                 </span>
               </Link>
-              <Link
-                to="#"
+              <label
+                htmlFor="my-drawer-4"
                 className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-white"
               >
                 <span className="text-2xl">
@@ -127,11 +128,24 @@ const SecondNav = () => {
                 <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-secondary px-1.5 text-sm text-white">
                   2<span className="sr-only"> new emails </span>
                 </span>
-              </Link>
+              </label>
             </div>
           </nav>
         </div>
       </header>
+      <div className="drawer drawer-end z-50">
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-side ">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ul className="menu w-80 p-0 min-h-full bg-white text-base-content">
+            <MyCart />
+          </ul>
+        </div>
+      </div>
     </>
   );
 };
