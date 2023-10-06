@@ -108,7 +108,7 @@ const SecondNav = () => {
             {/*      <!-- Actions --> */}
             <div className="ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0">
               <Link
-                to="#"
+                to="/wishlist"
                 className="relative inline-flex h-9 me-4 w-9 items-center justify-center rounded-full text-white"
               >
                 <span className="text-2xl">

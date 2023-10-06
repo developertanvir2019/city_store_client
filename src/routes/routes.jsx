@@ -5,6 +5,9 @@ import Login from "../pages/Login";
 import Shop from "../pages/Shop";
 import Register from "../pages/Register";
 import Blogs from "../pages/Blogs";
+import ViewCart from "../pages/ViewCart";
+import Checkout from "../pages/Checkout";
+import Wishlist from "../pages/Wishlist";
 
 export const routes = createBrowserRouter([
   {
@@ -22,6 +25,18 @@ export const routes = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/viewCart",
+        element: <ViewCart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
       },
       {
         path: "/login",
