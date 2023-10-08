@@ -110,9 +110,7 @@ const ViewCart = () => {
             <label className="font-medium inline-block mb-3 text-sm uppercase">
               Shipping
             </label>
-            <select className="block p-2 text-gray-600 w-full text-sm">
-              <option>Standard shipping - $120</option>
-            </select>
+            <h3 className="text-lg font-semibold">Standard shipping - $120</h3>
           </div>
 
           <div className="border-t mt-8">

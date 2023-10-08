@@ -14,12 +14,10 @@ const Search = () => {
         id="category"
         name="category"
         className="py-3 px-4 text-white bg-primary font-semibold cursor-pointer"
-        value={category} // Bind the value to the category state
+        defaultValue={category} // Bind the value to the category state
         onChange={handleCategoryChange} // Handle changes in the select element
       >
-        <option value="" selected>
-          All Category
-        </option>
+        <option value="">All Category</option>
         <option value="furniture">Furniture</option>
         <option value="electronics">Electronics</option>
         <option value="fashion">Fashion</option>

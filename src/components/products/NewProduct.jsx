@@ -2,11 +2,11 @@ import Slider from "react-slick";
 import ProductCard from "./ProductCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useContext, useState } from "react";
-import { useQuery } from "react-query";
-import { fetchProducts } from "../../utlis/fetchProducts";
+import { useContext, useEffect, useState } from "react";
 import Spinner from "../shared/Spinner";
 import { AuthContext } from "../shared/ValueProvider/AuthProvider";
+import DetailsModal from "./DetailsModal";
+import axios from "axios";
 const NewProduct = () => {
   const { title, category } = useContext(AuthContext);
   var settings = {
@@ -51,21 +51,36 @@ const NewProduct = () => {
   const [allProducts, setAllProducts] = useState([]); // Initialize as an empty array
 
   // ...
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    // Function to fetch products
+    const fetchProducts = async () => {
+      setLoading(true);
 
-  // eslint-disable-next-line no-unused-vars
-  const { data, error, isLoading } = useQuery(
-    ["products", category, title, page],
-    async () => {
-      const data = await fetchProducts(category, title, page);
-      return data;
-    },
-    {
-      staleTime: 60000,
-      onSuccess: (data) => {
-        setAllProducts(data);
-      },
-    }
-  );
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/product/list",
+          {
+            params: { category, title, page },
+          }
+        );
+
+        setAllProducts(response.data); // Assuming response.data contains the product list
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, [category, title, page]);
+
+  const [selectedProduct, setSelectedProduct] = useState(null); // Add selectedProduct state
+
+  // Function to open the modal with the product object
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    document.getElementById("detail_modal").showModal();
+  };
   if (isLoading) {
     return (
       <div>
@@ -74,10 +89,10 @@ const NewProduct = () => {
     );
   }
 
-  if (error) {
+  if (!isLoading && !allProducts?.length) {
     return (
-      <div className="text-red-400 text-2xl font-semibold">
-        Error: {error.message}
+      <div className="text-primary text-2xl flex justify-center font-semibold">
+        <h1> No Products found</h1>
       </div>
     );
   }
@@ -91,9 +106,14 @@ const NewProduct = () => {
         <div>
           <Slider {...settings}>
             {allProducts?.map((product) => (
-              <ProductCard key={product?._id} product={product} />
+              <ProductCard
+                key={product?._id}
+                product={product}
+                openModal={() => openModal(product)} // Pass openModal function
+              />
             ))}
           </Slider>
+          <DetailsModal product={selectedProduct} />
         </div>
       </div>
     </div>
