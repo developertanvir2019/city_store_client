@@ -3,8 +3,7 @@ import StarRatings from "react-star-ratings";
 import { FiEye, FiHeart, FiShoppingCart } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import DetailsModal from "./DetailsModal";
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, openModal }) => {
   return (
     <div>
       <div className="w-60 group bg-gray-50 mx-4 my-4">
@@ -46,9 +45,7 @@ const ProductCard = ({ product }) => {
                 <Tooltip id="add to wishlist" />
               </div>
               <div
-                onClick={() =>
-                  document.getElementById("detail_modal").showModal()
-                }
+                onClick={() => openModal(product)} // Pass the product object to openModal function
                 data-tooltip-id="view product"
                 data-tooltip-content="view product"
                 className="p-3 rounded-full bg-white text-lg hover:bg-primary hover:text-white"
@@ -60,7 +57,6 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </div>
-      <DetailsModal />
     </div>
   );
 };

@@ -4,11 +4,12 @@ import Tabs from "./Tabs";
 import Spinner from "../shared/Spinner";
 import { fetchProducts } from "../../utlis/fetchProducts";
 import { useQuery } from "react-query";
-import { useContext, useState } from "react";
-import { AuthContext } from "../shared/ValueProvider/AuthProvider";
+import { useState } from "react";
+import DetailsModal from "../products/DetailsModal";
 
 const ProductsTab = () => {
-  const { title, category } = useContext(AuthContext);
+  const [category, setCategory] = useState("");
+  let title = "";
   var settings = {
     dots: true,
     rows: 2,
@@ -55,7 +56,7 @@ const ProductsTab = () => {
 
   // eslint-disable-next-line no-unused-vars
   const { data, error, isLoading } = useQuery(
-    ["products", category, title, page],
+    ["Tabproducts", category, title, page],
     async () => {
       const data = await fetchProducts(category, title, page);
       return data;
@@ -67,13 +68,13 @@ const ProductsTab = () => {
       },
     }
   );
-  if (isLoading) {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    );
-  }
+  const [selectedProduct, setSelectedProduct] = useState(null); // Add selectedProduct state
+
+  // Function to open the modal with the product object
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    document.getElementById("detail_modal").showModal();
+  };
 
   if (error) {
     return (
@@ -84,17 +85,26 @@ const ProductsTab = () => {
   }
   return (
     <div>
-      <Tabs />
+      <Tabs setCategory={setCategory} />
       <div className="mx-8">
-        <Slider {...settings}>
-          {allProducts
-            ?.slice()
-            .reverse()
-            .map((product) => (
-              <ProductCard key={product?._id} product={product} />
-            ))}
-        </Slider>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <Slider {...settings}>
+            {allProducts
+              ?.slice()
+              .reverse()
+              .map((product) => (
+                <ProductCard
+                  key={product?._id}
+                  product={product}
+                  openModal={() => openModal(product)} // Pass openModal function
+                />
+              ))}
+          </Slider>
+        )}
       </div>
+      <DetailsModal product={selectedProduct} />
     </div>
   );
 };

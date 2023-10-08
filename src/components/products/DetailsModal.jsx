@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import StarRatings from "react-star-ratings";
 import SizeSelector from "./SizeSelector";
 import ColorSelector from "./ColorSelect";
 import { FiShoppingCart } from "react-icons/fi";
 
-const DetailsModal = () => {
+const DetailsModal = ({ product }) => {
   return (
     <div>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -17,20 +18,23 @@ const DetailsModal = () => {
           </form>
           {/* design start */}
           <div className="lg:flex justify-between items-center">
-            <img
-              className="lg:w-1/2"
-              src="https://themes.pixelstrap.com/bigdeal/assets/images/mega-store/product/8.jpg"
-              alt=""
-            />
+            <img className="lg:w-1/2" src={product?.img} alt="" />
             <div className="lg:w-1/2 text-start">
-              <h2 className="text-xl font-semibold">Wireless Headphones</h2>
+              <h2 className="text-xl font-semibold">{product?.title}</h2>
               <p className="font-semibold">
-                $70 <del>MRP $140</del>{" "}
-                <span className="text-primary">50% OFF</span>
+                ${product?.oldPrice} <del>MRP ${product?.newPrice}</del>{" "}
+                <span className="text-primary">
+                  {(
+                    ((product?.oldPrice - product?.newPrice) /
+                      product?.oldPrice) *
+                    100
+                  ).toFixed(0)}
+                  % OFF
+                </span>
               </p>
               <div className="flex">
                 <StarRatings
-                  rating={4.203}
+                  rating={product?.rating}
                   starDimension="15px"
                   starSpacing="3px"
                   starRatedColor="orange"
@@ -39,10 +43,7 @@ const DetailsModal = () => {
               </div>
               <div className="divider h-0"></div>
               <h2 className="text-lg font-semibold">Product information</h2>
-              <p className="text-gray-400 ">
-                Sed ut perspiciatis, unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium
-              </p>
+              <p className="text-gray-400 ">{product?.description}</p>
               <div className="divider h-0"></div>
               <h2 className="text-xl font-semibold">Select Size</h2>
               <SizeSelector />
