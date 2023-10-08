@@ -16,10 +16,10 @@ const categoryItems = [
   { id: 1, img: category1, title: "Furniture" },
   { id: 2, img: category2, title: "Electronics" },
   { id: 3, img: category3, title: "Fashion" },
-  { id: 4, img: category4, title: "Medicine" },
+  { id: 7, img: category7, title: " Shoes" },
+  { id: 4, img: category4, title: "Cloths" },
   { id: 5, img: category5, title: "Cosmetic" },
   { id: 6, img: category6, title: "Bycycle" },
-  { id: 7, img: category7, title: " Shoes" },
   { id: 8, img: category5, title: "Gym" },
 ];
 

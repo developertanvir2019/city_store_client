@@ -1,17 +1,35 @@
-import { BiSolidDownArrow } from "react-icons/bi";
+import { useContext } from "react";
 import { BsSearch } from "react-icons/bs";
+import { AuthContext } from "../ValueProvider/AuthProvider";
 const Search = () => {
+  const { setTitle, setCategory, category } = useContext(AuthContext);
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+  };
   return (
     <div className="flex items-center">
-      <div className="flex py-3 px-4 items-center  text-white bg-primary font-semibold cursor-pointer">
-        <span>All categories</span>
-        <span className="ps-2">
-          <BiSolidDownArrow />
-        </span>
-      </div>
+      {/* Add the select element here */}
+      <select
+        id="category"
+        name="category"
+        className="py-3 px-4 text-white bg-primary font-semibold cursor-pointer"
+        value={category} // Bind the value to the category state
+        onChange={handleCategoryChange} // Handle changes in the select element
+      >
+        <option value="" selected>
+          All Category
+        </option>
+        <option value="furniture">Furniture</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="shoes">Shoes</option>
+        <option value="cloths">Cloths</option>
+      </select>
 
       <div>
         <input
+          onChange={(e) => setTitle(e.target.value)}
           className="border-2 outline-none p-3 w-80 space-x-4 rounded-lg"
           type="text"
           placeholder="Article name or keyword..."

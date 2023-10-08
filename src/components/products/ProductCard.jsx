@@ -1,31 +1,29 @@
+/* eslint-disable react/prop-types */
 import StarRatings from "react-star-ratings";
 import { FiEye, FiHeart, FiShoppingCart } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import DetailsModal from "./DetailsModal";
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
   return (
     <div>
       <div className="w-60 group bg-gray-50 mx-4 my-4">
         <div className="relative overflow-hidden">
-          <img
-            className="h-auto w-full object-cover"
-            src="https://themes.pixelstrap.com/bigdeal/assets/images/mega-store/product/7.jpg"
-            alt=""
-          />
+          <img className="h-56 w-full object-cover" src={product?.img} alt="" />
           <div className="flex justify-center bg-white">
             <div>
               <StarRatings
-                rating={2.403}
+                rating={product?.rating}
                 starDimension="15px"
                 starSpacing="3px"
                 starRatedColor="orange"
               />
               <h3 className="text-lg font-semibold text-gray-800">
-                Men fashion shoes
+                {product?.title}
               </h3>
               <h3 className="text-lg font-semibold text-primary">
-                $50 <del className="text-gray-800">$70</del>
+                {product?.newPrice}৳{" "}
+                <del className="text-gray-800">{product?.oldPrice}৳</del>
               </h3>
             </div>
           </div>
