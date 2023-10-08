@@ -3,7 +3,40 @@ import StarRatings from "react-star-ratings";
 import { FiEye, FiHeart, FiShoppingCart } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import axios from "axios";
+import useCurrentUserEmail from "../../utlis/UseCurrentUserEmail";
+import Swal from "sweetalert2";
 const ProductCard = ({ product, openModal }) => {
+  const userEmail = useCurrentUserEmail();
+
+  const addToWishlist = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/wishlist/add",
+        {
+          userEmail,
+          productId: product?._id,
+        }
+      );
+
+      if (response.status === 201) {
+        Swal.fire(
+          "success",
+          "Product added to wishlist successfully",
+          "success"
+        );
+      } else {
+        Swal.fire("Failed", "Failed to add product to wishlist", "error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire(
+        "Failed",
+        "An error occurred while adding the product to the wishlist",
+        "error"
+      );
+    }
+  };
   return (
     <div className="flex justify-center">
       <div className="w-60 group bg-gray-50 mx-4 my-4">
@@ -37,6 +70,7 @@ const ProductCard = ({ product, openModal }) => {
                 <Tooltip id="add to cart" />
               </div>
               <div
+                onClick={() => addToWishlist()}
                 data-tooltip-id="add to wishlist"
                 data-tooltip-content="add to wishlist"
                 className="p-3 rounded-full bg-white text-lg hover:bg-primary hover:text-white"

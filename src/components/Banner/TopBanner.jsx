@@ -80,7 +80,7 @@ const TopBanner = () => {
             <ShopNowCard
               title={"Stylish Chair"}
               description={"WEEKEND SALE"}
-              color={"yellow-500"}
+              color={"secondary"}
               image={img5}
             />
           </div>
@@ -95,7 +95,7 @@ const TopBanner = () => {
           <ShopNowCard
             title={"Smart Led Tv"}
             description={"NOW 70% OFF"}
-            color={"green-600"}
+            color={"secondary"}
             image={img6}
           />
           <ShopNowCard

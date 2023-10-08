@@ -27,15 +27,11 @@ const Login = () => {
           Swal.fire("Congratulations!!!", "Log in success", "success");
           navigate("/shop");
         } else {
-          Swal.fire(
-            "Register Failed",
-            "Number or password is incorrect",
-            "error"
-          );
+          Swal.fire("Login Failed", "Number or password is incorrect", "error");
         }
       })
       .catch((error) => {
-        Swal.fire("Register Failed", error.response.data.error, "error");
+        Swal.fire("Login Failed", error.response.data.error, "error");
       });
   };
 
