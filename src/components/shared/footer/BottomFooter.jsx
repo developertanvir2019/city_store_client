@@ -1,9 +1,9 @@
 import {
   FaTwitter,
   FaFacebook,
-  FaGoogle,
   FaInstagram,
   FaDiscord,
+  FaLinkedin,
 } from "react-icons/fa";
 const BottomFooter = () => {
   return (
@@ -11,7 +11,13 @@ const BottomFooter = () => {
       <div className="container px-6 mx-auto">
         <div className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
           <div className="col-span-2 md:col-span-4 lg:col-span-6 text-white text-lg">
-            &copy; Copyright 2023 by city shop
+            &copy; Copyright 2023 by city shop ||{" "}
+            <a
+              className="text-yellow-400 font-semibold text-lg underline"
+              href="https://www.linkedin.com/in/tanvir2022/"
+            >
+              Tanvir
+            </a>
           </div>
           <nav
             aria-labelledby="footer-social-links-dark"
@@ -23,7 +29,7 @@ const BottomFooter = () => {
             <ul className="flex items-center justify-end gap-4 text-gray-800">
               <li className="text-lg bg-white p-2 rounded-full shadow-lg">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=100077318226990"
                   className="transition-colors duration-300 hover:text-secondary"
                 >
                   <FaFacebook />
@@ -31,18 +37,18 @@ const BottomFooter = () => {
               </li>
               <li className="text-lg bg-white p-2 rounded-full shadow-lg">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/tanvir2022/"
                   className="transition-colors duration-300 hover:text-secondary"
                 >
-                  <FaGoogle />
+                  <FaLinkedin />
                 </a>
               </li>
               <li className="text-lg bg-white p-2 rounded-full shadow-lg">
                 <a
-                  href="#"
+                  href="https://discordapp.com/users/1061511532854386719"
                   className="transition-colors duration-300 hover:text-secondary"
                 >
-                  <FaInstagram />
+                  <FaDiscord />
                 </a>
               </li>
               <li className="text-lg bg-white p-2 rounded-full shadow-lg">
@@ -58,7 +64,7 @@ const BottomFooter = () => {
                   href="#"
                   className="transition-colors duration-300 hover:text-secondary"
                 >
-                  <FaDiscord />
+                  <FaInstagram />
                 </a>
               </li>
             </ul>
