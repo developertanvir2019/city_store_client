@@ -10,7 +10,8 @@ import { fetchWishlist } from "../../../features/wishlist/wishlistSlice";
 import axios from "axios";
 import { AuthContext } from "../ValueProvider/AuthProvider";
 const SecondNav = () => {
-  const { fetchCart, isLogin, setIsLoggedIn } = useContext(AuthContext);
+  const { fetchCart, isLogin, setIsLoggedIn, fetchWish } =
+    useContext(AuthContext);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const userEmail = useCurrentUserEmail();
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const SecondNav = () => {
       // Fetch wishlist data only if userEmail is available
       dispatch(fetchWishlist(userEmail));
     }
-  }, [dispatch, userEmail]);
+  }, [dispatch, userEmail, fetchWish]);
 
   const cartUrl = `https://city-server-cwdm.onrender.com/api/cart/user/${userEmail}`;
   const [carts, setCarts] = useState([]);

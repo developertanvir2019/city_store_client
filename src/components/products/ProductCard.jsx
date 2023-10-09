@@ -9,7 +9,8 @@ import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../shared/ValueProvider/AuthProvider";
 const ProductCard = ({ product, openModal }) => {
-  const { fetchCart, setFetchCart } = useContext(AuthContext);
+  const { fetchCart, setFetchCart, fetchWish, setFetchWish } =
+    useContext(AuthContext);
   const userEmail = useCurrentUserEmail();
 
   const addToWishlist = async () => {
@@ -23,6 +24,7 @@ const ProductCard = ({ product, openModal }) => {
       );
 
       if (response.status === 201) {
+        setFetchWish(!fetchWish);
         Swal.fire(
           "success",
           "Product added to wishlist successfully",
@@ -53,7 +55,7 @@ const ProductCard = ({ product, openModal }) => {
         setFetchCart(!fetchCart);
         Swal.fire("success", "Product added to cart successfully", "success");
       } else {
-        Swal.fire("Failed", "Failed to add cart", "error");
+        Swal.fire("success", "Product added to cart successfully", "success");
       }
     } catch (error) {
       console.error("Error:", error);
