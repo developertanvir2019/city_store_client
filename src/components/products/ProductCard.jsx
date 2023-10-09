@@ -6,7 +6,10 @@ import "react-tooltip/dist/react-tooltip.css";
 import axios from "axios";
 import useCurrentUserEmail from "../../utlis/UseCurrentUserEmail";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../shared/ValueProvider/AuthProvider";
 const ProductCard = ({ product, openModal }) => {
+  const { fetchCart, setFetchCart } = useContext(AuthContext);
   const userEmail = useCurrentUserEmail();
 
   const addToWishlist = async () => {
@@ -37,6 +40,27 @@ const ProductCard = ({ product, openModal }) => {
       );
     }
   };
+  const addToCart = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/add", {
+        userEmail,
+        productId: product?._id,
+      });
+      if (response.status === 201) {
+        setFetchCart(!fetchCart);
+        Swal.fire("success", "Product added to cart successfully", "success");
+      } else {
+        Swal.fire("Failed", "Failed to add cart", "error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire(
+        "Failed",
+        "An error occurred while adding the product to the cart",
+        "error"
+      );
+    }
+  };
   return (
     <div className="flex justify-center">
       <div className="w-60 group bg-gray-50 mx-4 my-4">
@@ -62,6 +86,7 @@ const ProductCard = ({ product, openModal }) => {
           <div className="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
             <div className="flex justify-center gap-3">
               <div
+                onClick={() => addToCart()}
                 data-tooltip-id="add to cart"
                 data-tooltip-content="add to cart"
                 className="p-3 rounded-full bg-white text-lg hover:bg-primary hover:text-white"

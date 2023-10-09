@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import logo from "../../../assets/logo.png";
@@ -7,7 +7,10 @@ import MyCart from "./MyCart";
 import useCurrentUserEmail from "../../../utlis/UseCurrentUserEmail";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWishlist } from "../../../features/wishlist/wishlistSlice";
+import axios from "axios";
+import { AuthContext } from "../ValueProvider/AuthProvider";
 const SecondNav = () => {
+  const { fetchCart } = useContext(AuthContext);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const userEmail = useCurrentUserEmail();
   const dispatch = useDispatch();
@@ -18,6 +21,25 @@ const SecondNav = () => {
       dispatch(fetchWishlist(userEmail));
     }
   }, [dispatch, userEmail]);
+
+  const cartUrl = `http://localhost:5000/api/cart/user/${userEmail}`;
+  const [carts, setCarts] = useState([]);
+  console.log(carts);
+  useEffect(() => {
+    if (userEmail) {
+      const fetchUserCart = async () => {
+        try {
+          const response = await axios.get(cartUrl);
+          const cartItems = response.data;
+          setCarts(cartItems);
+        } catch (error) {
+          // Handle errors here
+          console.error("Error fetching user's cart:", error);
+        }
+      };
+      fetchUserCart();
+    }
+  }, [cartUrl, userEmail, fetchCart]);
   return (
     <>
       {/*<!-- Header --> */}
@@ -139,7 +161,8 @@ const SecondNav = () => {
                   <FaShoppingCart />
                 </span>
                 <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-secondary px-1.5 text-sm text-white">
-                  2<span className="sr-only"> new emails </span>
+                  {carts?.length}
+                  <span className="sr-only"> new emails </span>
                 </span>
               </label>
             </div>
@@ -155,7 +178,7 @@ const SecondNav = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu w-80 p-0 min-h-full bg-white text-base-content">
-            <MyCart />
+            <MyCart carts={carts} />
           </ul>
         </div>
       </div>

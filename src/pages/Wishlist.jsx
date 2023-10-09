@@ -1,14 +1,16 @@
 import { FiDelete, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchWishlist } from "../features/wishlist/wishlistSlice";
 import useCurrentUserEmail from "../utlis/UseCurrentUserEmail";
 import Spinner from "../components/shared/Spinner";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../components/shared/ValueProvider/AuthProvider";
 
 const Wishlist = () => {
+  const { fetchCart, setFetchCart } = useContext(AuthContext);
   const userEmail = useCurrentUserEmail();
   const dispatch = useDispatch();
   const [isLoadingWishlist, setIsLoadingWishlist] = useState(true); // Local state for loading
@@ -39,6 +41,30 @@ const Wishlist = () => {
       // Handle errors if the deletion fails
       console.error("Error deleting item:", error);
       Swal.fire("Deleted FAiled", "failed to delete", "error");
+    }
+  };
+
+  const addToCart = async (id) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/add", {
+        userEmail,
+        productId: id,
+      });
+      if (response.status === 201) {
+        setFetchCart(!fetchCart);
+        dispatch(fetchWishlist(userEmail));
+        Swal.fire("success", "Product added to cart successfully", "success");
+      } else {
+        Swal.fire("success", response?.message, "success");
+        dispatch(fetchWishlist(userEmail));
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire(
+        "Failed",
+        "An error occurred while adding the product to the cart",
+        "error"
+      );
     }
   };
 
@@ -92,7 +118,9 @@ const Wishlist = () => {
               <td>
                 <div className="flex justify-start items-center gap-4 text-lg">
                   <FiDelete onClick={() => handleDelete(data?._id)} />
-                  <FiShoppingCart />
+                  <FiShoppingCart
+                    onClick={() => addToCart(data?.productInfo[0]?._id)}
+                  />
                 </div>
               </td>
             </tr>

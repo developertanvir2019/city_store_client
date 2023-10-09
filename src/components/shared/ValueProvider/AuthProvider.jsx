@@ -6,12 +6,15 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
+  const [fetchCart, setFetchCart] = useState(false);
 
   const authInfo = {
     title,
     setTitle,
     category,
     setCategory,
+    fetchCart,
+    setFetchCart,
   };
 
   return (
