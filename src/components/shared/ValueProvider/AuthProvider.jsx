@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [fetchCart, setFetchCart] = useState(false);
+  const [isLogin, setIsLoggedIn] = useState(!!localStorage.getItem("jwtToken"));
 
   const authInfo = {
     title,
@@ -15,6 +16,8 @@ const AuthProvider = ({ children }) => {
     setCategory,
     fetchCart,
     setFetchCart,
+    isLogin,
+    setIsLoggedIn,
   };
 
   return (

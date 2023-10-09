@@ -3,8 +3,36 @@ import StarRatings from "react-star-ratings";
 import SizeSelector from "./SizeSelector";
 import ColorSelector from "./ColorSelect";
 import { FiShoppingCart } from "react-icons/fi";
+import { useContext } from "react";
+import { AuthContext } from "../shared/ValueProvider/AuthProvider";
+import axios from "axios";
+import useCurrentUserEmail from "../../utlis/UseCurrentUserEmail";
+import Swal from "sweetalert2";
 
 const DetailsModal = ({ product }) => {
+  const { fetchCart, setFetchCart } = useContext(AuthContext);
+  const userEmail = useCurrentUserEmail();
+  const addToCart = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/add", {
+        userEmail,
+        productId: product?._id,
+      });
+      if (response.status === 201) {
+        setFetchCart(!fetchCart);
+        Swal.fire("success", "Product added to cart successfully", "success");
+      } else {
+        Swal.fire("success", "Product added to cart successfully", "success");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire(
+        "Failed",
+        "An error occurred while adding the product to the cart",
+        "error"
+      );
+    }
+  };
   return (
     <div>
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -49,7 +77,10 @@ const DetailsModal = ({ product }) => {
               <SizeSelector />
               <h2 className="text-xl font-semibold mt-3 mb-1">Select Color</h2>
               <ColorSelector />
-              <button className="btn btn-primary bg-primary text-white font-bold my-4">
+              <button
+                onClick={() => addToCart()}
+                className="btn btn-primary bg-primary text-white font-bold my-4"
+              >
                 <FiShoppingCart /> Add to cart
               </button>
             </div>

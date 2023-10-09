@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../components/shared/ValueProvider/AuthProvider";
 
 const Login = () => {
+  const { setIsLoggedIn } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(true);
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
@@ -24,6 +26,7 @@ const Login = () => {
         console.log(data.token);
         if (data?.token) {
           localStorage.setItem("jwtToken", data.token);
+          setIsLoggedIn(true);
           Swal.fire("Congratulations!!!", "Log in success", "success");
           navigate("/shop");
         } else {

@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
+import { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../ValueProvider/AuthProvider";
+import Swal from "sweetalert2";
 const MyCart = ({ carts }) => {
+  const { fetchCart, setFetchCart } = useContext(AuthContext);
   let totalPrice = 0;
 
   // Use reduce to calculate the total price
@@ -16,6 +21,17 @@ const MyCart = ({ carts }) => {
       return accumulator + priceToAdd;
     }, 0); // Initial value of accumulator is 0
   }
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/cart/${id}`);
+      Swal.fire("Deleted", "SuccessFully deleted", "success");
+      setFetchCart(!fetchCart);
+    } catch (error) {
+      // Handle errors if the deletion fails
+      console.error("Error deleting item:", error);
+      Swal.fire("Deleted FAiled", "failed to delete", "error");
+    }
+  };
   return (
     <div>
       <nav className="text-primary text-xl font-semibold bg-gray-200 px-5 py-2 sticky top-0">
@@ -48,7 +64,7 @@ const MyCart = ({ carts }) => {
                   <input
                     className="border text-center w-8"
                     type="text"
-                    value="1"
+                    value={cart?.quantity}
                   />
                   <p className="px-1 border cursor-pointer hover:bg-primary hover:text-white font-semibold">
                     +
@@ -56,7 +72,7 @@ const MyCart = ({ carts }) => {
                 </div>
                 <div className="flex items-center gap-3">
                   <FaEdit />
-                  <RiDeleteBin6Line />
+                  <RiDeleteBin6Line onClick={() => handleDelete(cart?._id)} />
                 </div>
               </div>
             </div>

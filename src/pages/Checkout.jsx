@@ -1,4 +1,42 @@
+import { useContext, useEffect, useState } from "react";
+import useCurrentUserEmail from "../utlis/UseCurrentUserEmail";
+import { AuthContext } from "../components/shared/ValueProvider/AuthProvider";
+import axios from "axios";
+
 const Checkout = () => {
+  const [carts, setCarts] = useState([]);
+  const { fetchCart } = useContext(AuthContext);
+  const userEmail = useCurrentUserEmail();
+  let totalPrice = 0;
+
+  // Use reduce to calculate the total price
+  if (carts) {
+    totalPrice = carts.reduce((accumulator, cart) => {
+      const { productInfo } = cart || {};
+      const { newPrice } = productInfo ? productInfo[0] : {};
+
+      // Convert newPrice to a number and add it to the accumulator
+      const priceToAdd = parseFloat(newPrice || 0);
+      return accumulator + priceToAdd;
+    }, 0); // Initial value of accumulator is 0
+  }
+
+  const cartUrl = `http://localhost:5000/api/cart/user/${userEmail}`;
+  useEffect(() => {
+    if (userEmail) {
+      const fetchUserCart = async () => {
+        try {
+          const response = await axios.get(cartUrl);
+          const cartItems = response.data;
+          setCarts(cartItems);
+        } catch (error) {
+          // Handle errors here
+          console.error("Error fetching user's cart:", error);
+        }
+      };
+      fetchUserCart();
+    }
+  }, [cartUrl, userEmail, fetchCart]);
   return (
     <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 ">
       <div className="min-h-screen p-3 bg-gray-200 leading-loose">
@@ -81,12 +119,6 @@ const Checkout = () => {
             />
           </div>
           <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-            <label
-              className="hidden block text-sm text-gray-600"
-              htmlFor="cus_email"
-            >
-              Zip
-            </label>
             <input
               className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
@@ -110,7 +142,7 @@ const Checkout = () => {
                 <span className="text-sm dark:text-violet-400">x3</span>
               </h3>
               <div className="text-right">
-                <span className="block">$7.50</span>
+                <span className="block">${totalPrice}</span>
               </div>
             </li>
           </ul>
@@ -118,7 +150,7 @@ const Checkout = () => {
             <div>
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>$21.50</span>
+                <span>${totalPrice}</span>
               </div>
               <div className="flex items-center space-x-2 text-xs">
                 <svg
@@ -136,14 +168,14 @@ const Checkout = () => {
             </div>
             <div className="flex justify-between">
               <span>Discount</span>
-              <span>-$4.30</span>
+              <span>-$99</span>
             </div>
           </div>
           <div className="pt-4 space-y-2">
             <div className="flex flex-col">
               <div className="flex justify-between">
                 <span>Delivery fee</span>
-                <span>$4.00</span>
+                <span>$120</span>
               </div>
               <a
                 rel="noopener noreferrer"
@@ -156,7 +188,7 @@ const Checkout = () => {
             <div className="space-y-6">
               <div className="flex justify-between">
                 <span>Total</span>
-                <span className="font-semibold">$22.70</span>
+                <span className="font-semibold">${totalPrice + 120 - 99}</span>
               </div>
               <button
                 type="button"

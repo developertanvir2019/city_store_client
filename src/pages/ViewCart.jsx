@@ -1,13 +1,51 @@
-import { FiDelete } from "react-icons/fi";
+import { useContext, useEffect, useState } from "react";
+import ViewCartProduct from "../components/viewCart/ViewCartProduct";
+import useCurrentUserEmail from "../utlis/UseCurrentUserEmail";
+import { AuthContext } from "../components/shared/ValueProvider/AuthProvider";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ViewCart = () => {
+  const [carts, setCarts] = useState([]);
+  const { fetchCart } = useContext(AuthContext);
+  const userEmail = useCurrentUserEmail();
+  let totalPrice = 0;
+
+  // Use reduce to calculate the total price
+  if (carts) {
+    totalPrice = carts.reduce((accumulator, cart) => {
+      const { productInfo } = cart || {};
+      const { newPrice } = productInfo ? productInfo[0] : {};
+
+      // Convert newPrice to a number and add it to the accumulator
+      const priceToAdd = parseFloat(newPrice || 0);
+      return accumulator + priceToAdd;
+    }, 0); // Initial value of accumulator is 0
+  }
+
+  const cartUrl = `http://localhost:5000/api/cart/user/${userEmail}`;
+  useEffect(() => {
+    if (userEmail) {
+      const fetchUserCart = async () => {
+        try {
+          const response = await axios.get(cartUrl);
+          const cartItems = response.data;
+          setCarts(cartItems);
+        } catch (error) {
+          // Handle errors here
+          console.error("Error fetching user's cart:", error);
+        }
+      };
+      fetchUserCart();
+    }
+  }, [cartUrl, userEmail, fetchCart]);
   return (
     <div className="mx-auto mt-10">
       <div className="lg:flex shadow-sm my-10">
         <div className="lg:w-3/4 bg-white px-10 py-10">
           <div className="flex justify-between border-b pb-8">
             <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-            <h2 className="font-semibold text-2xl">5 Items</h2>
+            <h2 className="font-semibold text-2xl">{carts?.length} Items</h2>
           </div>
           <div className="flex mt-10 mb-5">
             <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
@@ -25,65 +63,9 @@ const ViewCart = () => {
           </div>
 
           {/* products */}
-
-          <div className="flex items-center hover:bg-gray-100  border border-gray-300 shadow-sm -mx-8 px-6 py-5">
-            <div className="flex w-2/5">
-              <div className="w-20">
-                <img
-                  className="h-24"
-                  src="https://themes.pixelstrap.com/bigdeal/assets/images/mega-store/product/1.jpg"
-                  alt=""
-                />
-              </div>
-              <div className="flex flex-col justify-between ml-4 flex-grow">
-                <span className="font-bold text-sm">amr product</span>
-                <span className=" text-xs">tital</span>
-                <p className="cursor-pointer font-semibold  text-red-500  text-lg flex items-center">
-                  <FiDelete />
-                </p>
-                {/* Here, we've added an onClick event listener to the "Remove" link that calls a function to remove the product from the cart */}
-              </div>
-            </div>
-            <div className="flex justify-center w-1/5">
-              <svg
-                className="fill-current text-gray-600 w-3"
-                viewBox="0 0 448 512"
-              >
-                <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-              </svg>
-
-              <input
-                className="mx-2 border text-center w-8"
-                type="text"
-                value={678}
-                readOnly
-              />
-              {/* We've added the readOnly attribute to make sure the quantity input field is not editable by the user */}
-
-              <svg
-                className="fill-current text-gray-600 w-3"
-                viewBox="0 0 448 512"
-              >
-                <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-              </svg>
-            </div>
-            <div className="flex w-1/3 justify-end">
-              <span className="text-gray-600 mx-auto">$27</span>
-              <span className="text-gray-600 ml-0">593</span>
-            </div>
-            <input type="checkbox" id="my-modal-8" className="modal-toggle" />
-            <label htmlFor="my-modal-8" className="modal cursor-pointer">
-              <label className="modal-box relative" htmlFor="">
-                <h3 className="text-xl font-semibold text-secondary py-2 text-center">
-                  Please complete your payment
-                </h3>
-                <h3 className="text-2xl font-semibold text-center">
-                  Payable amount BDT- <span className="text-primary">120</span>
-                </h3>
-              </label>
-            </label>
-          </div>
-
+          {carts?.map((cart) => {
+            return <ViewCartProduct key={cart?._id} cart={cart} />;
+          })}
           <a
             href="/"
             className="flex font-semibold text-indigo-600 text-sm mt-10"
@@ -103,8 +85,10 @@ const ViewCart = () => {
             Order Summary
           </h1>
           <div className="flex justify-between mt-10 mb-5">
-            <span className="font-semibold text-sm uppercase">Items = 38</span>
-            <span className="font-semibold text-sm">$83</span>
+            <span className="font-semibold text-sm uppercase">
+              Items = {carts?.length}
+            </span>
+            <span className="font-semibold text-sm">${totalPrice}</span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -116,14 +100,14 @@ const ViewCart = () => {
           <div className="border-t mt-8">
             <div className="flex font-semibold justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
-              <span> 120</span>
+              <span> {totalPrice + 120}</span>
             </div>
-            <label
-              htmlFor="my-modal-8"
+            <Link
+              to="/checkout"
               className="uppercase w-full btn mt-4 bg-primary btn-primary"
             >
               Checkout
-            </label>
+            </Link>
           </div>
         </div>
       </div>

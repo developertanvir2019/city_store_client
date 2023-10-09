@@ -10,7 +10,7 @@ import { fetchWishlist } from "../../../features/wishlist/wishlistSlice";
 import axios from "axios";
 import { AuthContext } from "../ValueProvider/AuthProvider";
 const SecondNav = () => {
-  const { fetchCart } = useContext(AuthContext);
+  const { fetchCart, isLogin, setIsLoggedIn } = useContext(AuthContext);
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const userEmail = useCurrentUserEmail();
   const dispatch = useDispatch();
@@ -40,6 +40,13 @@ const SecondNav = () => {
       fetchUserCart();
     }
   }, [cartUrl, userEmail, fetchCart]);
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("jwtToken");
+    setIsLoggedIn(false); // Update the state when the user logs out
+  };
+
   return (
     <>
       {/*<!-- Header --> */}
@@ -129,14 +136,25 @@ const SecondNav = () => {
                 </Link>
               </li>
               <li role="none" className="flex items-stretch">
-                <Link
-                  role="menuitem"
-                  aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
-                  to="/login"
-                >
-                  <span>LOGIN</span>
-                </Link>
+                {isLogin ? (
+                  <button
+                    onClick={() => handleLogout()}
+                    role="menuitem"
+                    aria-haspopup="false"
+                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                  >
+                    <span>LOGOUT</span>
+                  </button>
+                ) : (
+                  <Link
+                    role="menuitem"
+                    aria-haspopup="false"
+                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                    to="/login"
+                  >
+                    <span>Login</span>
+                  </Link>
+                )}
               </li>
             </ul>
             {/*      <!-- Actions --> */}

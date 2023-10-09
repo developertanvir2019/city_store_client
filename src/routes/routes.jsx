@@ -8,6 +8,7 @@ import Blogs from "../pages/Blogs";
 import ViewCart from "../pages/ViewCart";
 import Checkout from "../pages/Checkout";
 import Wishlist from "../pages/Wishlist";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -28,15 +29,27 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/viewCart",
-        element: <ViewCart />,
+        element: (
+          <PrivateRoute>
+            <ViewCart />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/wishlist",
-        element: <Wishlist />,
+        element: (
+          <PrivateRoute>
+            <Wishlist />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
