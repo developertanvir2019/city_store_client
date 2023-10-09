@@ -1,21 +1,18 @@
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { routes } from "./routes/routes.jsx";
+import { Provider } from "react-redux";
 
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import AuthProvider from "./components/shared/ValueProvider/AuthProvider";
-
-const queryClient = new QueryClient();
+import { store } from "./app/store";
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
         <AuthProvider>
           <RouterProvider router={routes} />
-          <ReactQueryDevtools />
         </AuthProvider>
-      </QueryClientProvider>
+      </Provider>
     </>
   );
 }

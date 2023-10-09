@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import MyCart from "./MyCart";
+import useCurrentUserEmail from "../../../utlis/UseCurrentUserEmail";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchWishlist } from "../../../features/wishlist/wishlistSlice";
 const SecondNav = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const userEmail = useCurrentUserEmail();
+  const dispatch = useDispatch();
+  const { wishlist } = useSelector((state) => state.wishlist);
+  useEffect(() => {
+    if (userEmail) {
+      // Fetch wishlist data only if userEmail is available
+      dispatch(fetchWishlist(userEmail));
+    }
+  }, [dispatch, userEmail]);
   return (
     <>
       {/*<!-- Header --> */}
@@ -115,7 +127,8 @@ const SecondNav = () => {
                   <FiHeart />
                 </span>
                 <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-secondary px-1.5 text-sm text-white">
-                  2<span className="sr-only"> new emails </span>
+                  {wishlist?.length}
+                  <span className="sr-only"> new emails </span>
                 </span>
               </Link>
               <label
