@@ -14,10 +14,13 @@ const DetailsModal2 = ({ product }) => {
   const userEmail = useCurrentUserEmail();
   const addToCart = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/cart/add", {
-        userEmail,
-        productId: product?._id,
-      });
+      const response = await axios.post(
+        "https://city-server-cwdm.onrender.com/api/cart/add",
+        {
+          userEmail,
+          productId: product?._id,
+        }
+      );
       if (response.status === 201) {
         setFetchCart(!fetchCart);
         Swal.fire("success", "Product added to cart successfully", "success");

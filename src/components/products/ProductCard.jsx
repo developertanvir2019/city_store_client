@@ -15,7 +15,7 @@ const ProductCard = ({ product, openModal }) => {
   const addToWishlist = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/wishlist/add",
+        "https://city-server-cwdm.onrender.com/api/wishlist/add",
         {
           userEmail,
           productId: product?._id,
@@ -42,10 +42,13 @@ const ProductCard = ({ product, openModal }) => {
   };
   const addToCart = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/cart/add", {
-        userEmail,
-        productId: product?._id,
-      });
+      const response = await axios.post(
+        "https://city-server-cwdm.onrender.com/api/cart/add",
+        {
+          userEmail,
+          productId: product?._id,
+        }
+      );
       if (response.status === 201) {
         setFetchCart(!fetchCart);
         Swal.fire("success", "Product added to cart successfully", "success");

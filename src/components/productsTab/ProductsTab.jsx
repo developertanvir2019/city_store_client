@@ -61,7 +61,7 @@ const ProductsTab = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/product/list",
+          "https://city-server-cwdm.onrender.com/api/product/list",
           {
             params: { category, title, page },
           }

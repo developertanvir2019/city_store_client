@@ -22,7 +22,7 @@ const SecondNav = () => {
     }
   }, [dispatch, userEmail]);
 
-  const cartUrl = `http://localhost:5000/api/cart/user/${userEmail}`;
+  const cartUrl = `https://city-server-cwdm.onrender.com/api/cart/user/${userEmail}`;
   const [carts, setCarts] = useState([]);
   console.log(carts);
   useEffect(() => {

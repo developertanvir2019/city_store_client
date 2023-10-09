@@ -22,11 +22,15 @@ const Register = () => {
   const handleRegistrationSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/user/signup", registrationData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "https://city-server-cwdm.onrender.com/api/user/signup",
+        registrationData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         const data = response.data;
         if (data?.message) {

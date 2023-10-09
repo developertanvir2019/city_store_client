@@ -23,7 +23,9 @@ const MyCart = ({ carts }) => {
   }
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/cart/${id}`);
+      await axios.delete(
+        `https://city-server-cwdm.onrender.com/api/cart/${id}`
+      );
       Swal.fire("Deleted", "SuccessFully deleted", "success");
       setFetchCart(!fetchCart);
     } catch (error) {

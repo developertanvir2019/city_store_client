@@ -23,7 +23,7 @@ const ViewCart = () => {
     }, 0); // Initial value of accumulator is 0
   }
 
-  const cartUrl = `http://localhost:5000/api/cart/user/${userEmail}`;
+  const cartUrl = `https://city-server-cwdm.onrender.com/api/cart/user/${userEmail}`;
   useEffect(() => {
     if (userEmail) {
       const fetchUserCart = async () => {

@@ -16,7 +16,7 @@ const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/user/login", loginData, {
+      .post("https://city-server-cwdm.onrender.com/api/user/login", loginData, {
         headers: {
           "Content-Type": "application/json",
         },

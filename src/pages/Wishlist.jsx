@@ -34,7 +34,9 @@ const Wishlist = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/wishlist/${id}`);
+      await axios.delete(
+        `https://city-server-cwdm.onrender.com/api/wishlist/${id}`
+      );
       Swal.fire("Deleted", "SuccessFully deleted", "success");
       dispatch(fetchWishlist(userEmail));
     } catch (error) {
@@ -46,10 +48,13 @@ const Wishlist = () => {
 
   const addToCart = async (id) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/cart/add", {
-        userEmail,
-        productId: id,
-      });
+      const response = await axios.post(
+        "https://city-server-cwdm.onrender.com/api/cart/add",
+        {
+          userEmail,
+          productId: id,
+        }
+      );
       if (response.status === 201) {
         setFetchCart(!fetchCart);
         dispatch(fetchWishlist(userEmail));
