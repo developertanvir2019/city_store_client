@@ -110,7 +110,7 @@ const SecondNav = () => {
                 <Link
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-gray-300 lg:px-6"
                   to="/"
                 >
                   <span>HOME</span>
@@ -120,7 +120,7 @@ const SecondNav = () => {
                 <Link
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-gray-300 lg:px-6"
                   to="/shop"
                 >
                   <span>SHOP</span>
@@ -130,7 +130,7 @@ const SecondNav = () => {
                 <Link
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-gray-300 lg:px-6"
                   to="/blog"
                 >
                   <span>Blog</span>
@@ -142,7 +142,7 @@ const SecondNav = () => {
                     onClick={() => handleLogout()}
                     role="menuitem"
                     aria-haspopup="false"
-                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-gray-300 lg:px-6"
                   >
                     <span>LOGOUT</span>
                   </button>
@@ -150,7 +150,7 @@ const SecondNav = () => {
                   <Link
                     role="menuitem"
                     aria-haspopup="false"
-                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-secondary lg:px-6"
+                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-gray-300 lg:px-6"
                     to="/login"
                   >
                     <span>Login</span>
