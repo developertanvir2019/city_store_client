@@ -38,101 +38,99 @@ const Checkout = () => {
     }
   }, [cartUrl, userEmail, fetchCart]);
   return (
-    <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 ">
-      <div className="min-h-screen p-3 bg-gray-200 leading-loose">
-        <form className="max-w-lg m-4 p-4 bg-white rounded shadow-xl">
-          <p className="text-gray-800 font-medium">Customer information</p>
-          <div className="">
-            <label className="block text-sm text-gray-600" htmlFor="cus_name">
-              Name
-            </label>
-            <input
-              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-              id="cus_name"
-              name="cus_name"
-              type="text"
-              required=""
-              placeholder="Your Name"
-              aria-label="Name"
-            />
-          </div>
-          <div className="mt-2">
-            <label className="block text-sm text-gray-600" htmlFor="cus_email">
-              Email
-            </label>
-            <input
-              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-              id="cus_email"
-              name="cus_email"
-              type="text"
-              required=""
-              placeholder="Your Email"
-              aria-label="Email"
-            />
-          </div>
-          <div className="mt-2">
-            <label className=" block text-sm text-gray-600" htmlFor="cus_email">
-              Address
-            </label>
-            <input
-              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-              id="cus_email"
-              name="cus_email"
-              type="text"
-              required=""
-              placeholder="Street"
-              aria-label="Email"
-            />
-          </div>
-          <div className="mt-2">
-            <label
-              className="hidden text-sm block text-gray-600"
-              htmlFor="cus_email"
-            >
-              City
-            </label>
-            <input
-              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-              id="cus_email"
-              name="cus_email"
-              type="text"
-              required=""
-              placeholder="City"
-              aria-label="Email"
-            />
-          </div>
-          <div className="inline-block mt-2 w-1/2 pr-1">
-            <label
-              className="hidden block text-sm text-gray-600"
-              htmlFor="cus_email"
-            >
-              Country
-            </label>
-            <input
-              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-              id="cus_email"
-              name="cus_email"
-              type="text"
-              required=""
-              placeholder="Country"
-              aria-label="Email"
-            />
-          </div>
-          <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-            <input
-              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-              id="cus_email"
-              name="cus_email"
-              type="text"
-              required=""
-              placeholder="Zip"
-              aria-label="Email"
-            />
-          </div>
-        </form>
-      </div>
+    <div className="lg:flex justify-center gap-12 bg-gray-200  py-5">
+      <form className="w-80 m-4 p-4 bg-white rounded shadow-xl">
+        <p className="text-gray-800 font-medium">Customer information</p>
+        <div className="">
+          <label className="block text-sm text-gray-600" htmlFor="cus_name">
+            Name
+          </label>
+          <input
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+            id="cus_name"
+            name="cus_name"
+            type="text"
+            required=""
+            placeholder="Your Name"
+            aria-label="Name"
+          />
+        </div>
+        <div className="mt-2">
+          <label className="block text-sm text-gray-600" htmlFor="cus_email">
+            Email
+          </label>
+          <input
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+            id="cus_email"
+            name="cus_email"
+            type="text"
+            required=""
+            placeholder="Your Email"
+            aria-label="Email"
+          />
+        </div>
+        <div className="mt-2">
+          <label className=" block text-sm text-gray-600" htmlFor="cus_email">
+            Address
+          </label>
+          <input
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+            id="cus_email"
+            name="cus_email"
+            type="text"
+            required=""
+            placeholder="Street"
+            aria-label="Email"
+          />
+        </div>
+        <div className="mt-2">
+          <label
+            className="hidden text-sm block text-gray-600"
+            htmlFor="cus_email"
+          >
+            City
+          </label>
+          <input
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+            id="cus_email"
+            name="cus_email"
+            type="text"
+            required=""
+            placeholder="City"
+            aria-label="Email"
+          />
+        </div>
+        <div className="inline-block mt-2 w-1/2 pr-1">
+          <label
+            className="hidden block text-sm text-gray-600"
+            htmlFor="cus_email"
+          >
+            Country
+          </label>
+          <input
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+            id="cus_email"
+            name="cus_email"
+            type="text"
+            required=""
+            placeholder="Country"
+            aria-label="Email"
+          />
+        </div>
+        <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
+          <input
+            className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+            id="cus_email"
+            name="cus_email"
+            type="text"
+            required=""
+            placeholder="Zip"
+            aria-label="Email"
+          />
+        </div>
+      </form>
 
-      <div className="flex justify-center bg-gray-200 p-3">
+      <div className="flex justify-center p-3">
         <div className="flex flex-col mt-5 h-96 p-5  divide-y sm:w-96 sm:p-10 divide-gray-700 shadow-md bg-white">
           <h2 className="text-2xl font-semibold">Order items</h2>
           <ul className="flex flex-col pt-4 space-y-2">
