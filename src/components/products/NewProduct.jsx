@@ -32,7 +32,7 @@ const NewProduct = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          dots: false,
+          dots: true,
         },
       },
       {
@@ -40,7 +40,7 @@ const NewProduct = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          dots: false,
+          dots: true,
         },
       },
     ],

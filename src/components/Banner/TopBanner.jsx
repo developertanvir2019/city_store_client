@@ -27,9 +27,9 @@ const TopBanner = () => {
   return (
     <div className="bg-white">
       <div className="grid grid-cols-4  lg:grid-cols-12">
-        <div className="p-1 col-span-4 lg:col-span-3 mx-8 mt-2">
+        <div className="lg:p-1 md:p-1 col-span-4 lg:col-span-3 mx-8 mt-2 ">
           {/*<!-- Component: Leading Image One Line List --> */}
-          <ul className="divide-y divide-slate-200  border-2">
+          <ul className="divide-y divide-slate-200  border-2  lg:block md:block hidden">
             {categoryItems?.map((item) => (
               <li
                 key={item?.id}

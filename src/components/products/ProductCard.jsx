@@ -68,7 +68,7 @@ const ProductCard = ({ product, openModal }) => {
   };
   return (
     <div className="flex justify-center">
-      <div className="w-60 group bg-gray-50 mx-4 my-4">
+      <div className="w-80 group bg-gray-50 mx-4 my-4">
         <div className="relative overflow-hidden">
           <img className="h-56 w-full object-cover" src={product?.img} alt="" />
           <div className="flex justify-center bg-white">
