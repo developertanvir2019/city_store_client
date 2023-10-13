@@ -80,12 +80,14 @@ const DetailsModal = ({ product }) => {
               <SizeSelector />
               <h2 className="text-xl font-semibold mt-3 mb-1">Select Color</h2>
               <ColorSelector />
-              <button
-                onClick={() => addToCart()}
-                className="btn btn-primary bg-primary text-white font-bold my-4"
-              >
-                <FiShoppingCart /> Add to cart
-              </button>
+              <form method="dialog">
+                <button
+                  onClick={() => addToCart()}
+                  className="btn btn-primary bg-primary text-white font-bold my-4"
+                >
+                  <FiShoppingCart /> Add to cart
+                </button>
+              </form>
             </div>
           </div>
         </div>

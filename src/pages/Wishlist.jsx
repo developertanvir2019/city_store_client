@@ -88,7 +88,10 @@ const Wishlist = () => {
 
   if (wishlist.length === 0) {
     return (
-      <h2 className="text-2xl font-semibold my-12 mx-auto">NO DAta found</h2>
+      <div className="flex justify-center">
+        {" "}
+        <h2 className="text-2xl font-semibold my-12 mx-auto">NO DAta found</h2>
+      </div>
     );
   }
   return (

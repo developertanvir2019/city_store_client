@@ -63,9 +63,17 @@ const ViewCart = () => {
           </div>
 
           {/* products */}
-          {carts?.map((cart) => {
-            return <ViewCartProduct key={cart?._id} cart={cart} />;
-          })}
+          {carts?.length ? (
+            carts?.map((cart) => {
+              return <ViewCartProduct key={cart?._id} cart={cart} />;
+            })
+          ) : (
+            <div className="flex justify-center">
+              <h2 className="text-2xl font-semibold my-12 mx-auto">
+                NO Data found
+              </h2>
+            </div>
+          )}
           <a
             href="/"
             className="flex font-semibold text-indigo-600 text-sm mt-10"

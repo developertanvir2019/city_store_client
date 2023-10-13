@@ -1,9 +1,26 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
+import { useContext } from "react";
 import { FiDelete } from "react-icons/fi";
+import { AuthContext } from "../shared/ValueProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const ViewCartProduct = ({ cart }) => {
   const { img, title, newPrice, description } = cart?.productInfo?.[0] || {};
-  console.log(444, cart);
+  const { fetchCart, setFetchCart } = useContext(AuthContext);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(
+        `https://city-server-cwdm.onrender.com/api/cart/${id}`
+      );
+      Swal.fire("Deleted", "SuccessFully deleted", "success");
+      setFetchCart(!fetchCart);
+    } catch (error) {
+      // Handle errors if the deletion fails
+      console.error("Error deleting item:", error);
+      Swal.fire("Deleted FAiled", "failed to delete", "error");
+    }
+  };
   return (
     <div className="flex items-center my-4 hover:bg-gray-100  border border-gray-300 shadow-sm -mx-8 px-6 py-5">
       <div className="flex w-2/5">
@@ -14,7 +31,7 @@ const ViewCartProduct = ({ cart }) => {
           <span className="font-bold text-sm">{title}</span>
           <span className=" text-xs">{description.slice(0, 30)}...</span>
           <p className="cursor-pointer font-semibold  text-red-500  text-lg flex items-center">
-            <FiDelete />
+            <FiDelete onClick={() => handleDelete(cart?._id)} />
           </p>
           {/* Here, we've added an onClick event listener to the "Remove" link that calls a function to remove the product from the cart */}
         </div>
