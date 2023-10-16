@@ -45,6 +45,7 @@ const SecondNav = () => {
   // Function to handle logout
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");
+    window.location.reload();
     setIsLoggedIn(false); // Update the state when the user logs out
   };
 

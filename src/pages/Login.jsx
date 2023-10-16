@@ -28,7 +28,7 @@ const Login = () => {
           localStorage.setItem("jwtToken", data.token);
           setIsLoggedIn(true);
           Swal.fire("Congratulations!!!", "Log in success", "success");
-          navigate("/shop");
+          navigate("/");
         } else {
           Swal.fire("Login Failed", "Number or password is incorrect", "error");
         }
