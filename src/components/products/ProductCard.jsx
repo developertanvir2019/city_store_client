@@ -91,7 +91,15 @@ const ProductCard = ({ product, openModal }) => {
           <div className="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
             <div className="flex justify-center gap-3">
               <div
-                onClick={() => addToCart()}
+                onClick={() => {
+                  userEmail
+                    ? addToCart()
+                    : Swal.fire(
+                        "Login First",
+                        "Please login for purchase",
+                        "error"
+                      );
+                }}
                 data-tooltip-id="add to cart"
                 data-tooltip-content="add to cart"
                 className="p-3 rounded-full bg-white text-lg hover:bg-primary hover:text-white"
@@ -100,7 +108,15 @@ const ProductCard = ({ product, openModal }) => {
                 <Tooltip id="add to cart" />
               </div>
               <div
-                onClick={() => addToWishlist()}
+                onClick={() => {
+                  userEmail
+                    ? addToWishlist()
+                    : Swal.fire(
+                        "Login First",
+                        "Please login for purchase",
+                        "error"
+                      );
+                }}
                 data-tooltip-id="add to wishlist"
                 data-tooltip-content="add to wishlist"
                 className="p-3 rounded-full bg-white text-lg hover:bg-primary hover:text-white"

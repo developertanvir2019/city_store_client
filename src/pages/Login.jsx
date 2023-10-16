@@ -29,6 +29,7 @@ const Login = () => {
           setIsLoggedIn(true);
           Swal.fire("Congratulations!!!", "Log in success", "success");
           navigate("/");
+          window.location.reload();
         } else {
           Swal.fire("Login Failed", "Number or password is incorrect", "error");
         }
