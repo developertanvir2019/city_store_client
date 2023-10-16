@@ -2,13 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import useCurrentUserEmail from "../utlis/UseCurrentUserEmail";
 import { AuthContext } from "../components/shared/ValueProvider/AuthProvider";
 import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutFrom from "../components/checkout/CheckoutForm";
 
 const Checkout = () => {
   const [carts, setCarts] = useState([]);
   const { fetchCart } = useContext(AuthContext);
   const userEmail = useCurrentUserEmail();
   let totalPrice = 0;
-
+  const stripePromise = loadStripe(
+    "pk_test_51M6AoIBSIlSsQgf2OlG5Vk0G8Y2lZfviCeidT0uD67RiiGjNRwpzho0jeUeVCQm21EWfw9x1kbRyrgnBsJ225Mxq00exB8m28L"
+  );
   // Use reduce to calculate the total price
   if (carts) {
     totalPrice = carts.reduce((accumulator, cart) => {
@@ -189,6 +194,9 @@ const Checkout = () => {
                 <span className="font-semibold">${totalPrice + 120 - 99}</span>
               </div>
               <button
+                onClick={() =>
+                  document.getElementById("payment_modal").showModal()
+                }
                 type="button"
                 className="w-full py-2 font-semibold border rounded bg-primary text-white"
               >
@@ -198,6 +206,21 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+      <dialog id="payment_modal" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <div>
+            <Elements stripe={stripePromise}>
+              <CheckoutFrom data={{ price: totalPrice + 120 - 99 }} />
+            </Elements>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
