@@ -35,7 +35,7 @@ const MyCart = ({ carts }) => {
     }
   };
   return (
-    <div>
+    <div className="text-slate-800">
       <nav className="text-primary text-xl font-semibold bg-gray-200 px-5 py-2 sticky top-0">
         My Cart
       </nav>
@@ -64,7 +64,7 @@ const MyCart = ({ carts }) => {
                     -
                   </p>
                   <input
-                    className="border text-center w-8"
+                    className="border text-center w-8 bg-transparent"
                     type="text"
                     value={cart?.quantity}
                   />

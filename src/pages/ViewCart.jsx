@@ -40,7 +40,7 @@ const ViewCart = () => {
     }
   }, [cartUrl, userEmail, fetchCart]);
   return (
-    <div className="mx-auto mt-10">
+    <div className="mx-auto mt-10 text-slate-800">
       <div className="lg:flex shadow-sm my-10">
         <div className="lg:w-3/4 bg-white px-10 py-10">
           <div className="flex justify-between border-b pb-8">

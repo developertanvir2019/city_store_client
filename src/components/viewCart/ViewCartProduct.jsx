@@ -42,7 +42,7 @@ const ViewCartProduct = ({ cart }) => {
         </svg>
 
         <input
-          className="mx-2 border text-center w-8"
+          className="mx-2 border text-center w-8 bg-transparent"
           type="text"
           value={cart?.quantity}
           readOnly

@@ -99,7 +99,7 @@ const TopFooter = () => {
                         <input
                           type="text"
                           placeholder="Enter Full Name"
-                          className="py-2 px-4 border"
+                          className="py-2 px-4 bg-slate-100 border"
                         />
                         <span className="bg-primary text-white text-lg font-semibold">
                           <RxAvatar />
@@ -109,7 +109,7 @@ const TopFooter = () => {
                         <input
                           type="text"
                           placeholder="Enter your email"
-                          className="py-2 px-4 border"
+                          className="py-2 px-4 bg-slate-100 border"
                         />
                         <span className="bg-primary text-white text-lg font-semibold">
                           <AiOutlineMail />

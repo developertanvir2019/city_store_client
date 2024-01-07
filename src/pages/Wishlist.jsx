@@ -95,7 +95,7 @@ const Wishlist = () => {
     );
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white text-slate-700 lg:px-12">
       <h2 className="text-center text-primary font-semibold text-3xl py-5">
         wishlist
       </h2>

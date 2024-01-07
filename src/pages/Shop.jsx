@@ -46,8 +46,8 @@ const Shop = () => {
 
   if (!loading && !products?.length) {
     content = (
-      <div className="text-center mb-6 text-3xl font-semibold text-primary">
-        No video found!
+      <div className="text-center mb-20 my-12 text-3xl font-semibold text-primary">
+        No Product found!
       </div>
     );
   }

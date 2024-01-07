@@ -28,9 +28,9 @@ const Search = () => {
       <div>
         <input
           onChange={(e) => setTitle(e.target.value)}
-          className="border outline-none p-[.64rem] w-80 space-x-4"
+          className="border py-[.66rem] bg-slate-100 outline-none p-[.64rem] w-80 space-x-4"
           type="text"
-          placeholder="Article name or keyword..."
+          placeholder="Product name or keyword..."
         />
       </div>
 
