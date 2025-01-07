@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <div className="w-full max-w-7xl overflow-hidden mx-auto">
+      <App />
+    </div>
   </React.StrictMode>
 );
